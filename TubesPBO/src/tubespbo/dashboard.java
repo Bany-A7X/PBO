@@ -18,6 +18,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,10 +28,37 @@ import javax.swing.JOptionPane;
  */
 public class dashboard extends javax.swing.JFrame {
     int mouseX, mouseY;
+    String nama,email,kategori,item,lokasi,keterangan;
+    int nim;
 
+    public void loaddata(){
+        nim = Integer.parseInt(text_nim.getText());
+        nama = text_nama.getText();
+        email =text_email.getText();
+        kategori = (String)cb_kategori.getSelectedItem();
+        item = (String)cb_item.getSelectedItem();
+        lokasi = (String)cb_lokasi.getSelectedItem();
+    }
+    
+    
+    public void saveData(){
+        loaddata();
+        try{
+        Statement stat = (Statement) koneksi.getKoneksi().createStatement();
+        keterangan = "belum";
+        String sql = "Insert into menuadd (id,nama,email,kategori,item,lokasi,keterangan)"
+                    +"values ('"+nim+"','"+nama+"','"+email+"','"+kategori+"',"
+                    +"'"+item+"','"+lokasi+"','"+keterangan+"')";
+        PreparedStatement p = (PreparedStatement) koneksi.getKoneksi().prepareStatement(sql);
+        p.executeUpdate();
+        JOptionPane.showMessageDialog(null,"Berhasil!");
+    }catch(SQLException x){
+        JOptionPane.showMessageDialog(null,"Tidak diterima!",". Harap coba kembali.",2);
     /**
      * Creates new form dashboard
      */
+    }
+    }
     public dashboard() {
         initComponents();
         showDate();
@@ -107,7 +135,7 @@ public class dashboard extends javax.swing.JFrame {
         save = new java.awt.Button();
         wallpaper_konten_add = new javax.swing.JLabel();
         edit_konten = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        tabel_panel = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -619,6 +647,11 @@ public class dashboard extends javax.swing.JFrame {
         add_konten.add(cb_item, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 370, -1, 30));
 
         save.setLabel("Save");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
         add_konten.add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 470, 60, -1));
 
         wallpaper_konten_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tubespbo/images/rsz_industrial-hall-1630740_1920-e1507904049620.jpg"))); // NOI18N
@@ -645,9 +678,9 @@ public class dashboard extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tabel_panel.setViewportView(jTable1);
 
-        edit_konten.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 590));
+        edit_konten.add(tabel_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 590));
 
         cardlayout.add(edit_konten, "card4");
 
@@ -811,6 +844,11 @@ public class dashboard extends javax.swing.JFrame {
         bc2.jLabelXLeft(810, 0, 25, 5, background2);
     }//GEN-LAST:event_formWindowOpened
 
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        // TODO add your handling code here:
+        saveData();
+    }//GEN-LAST:event_saveActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -841,6 +879,7 @@ public class dashboard extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new dashboard().setVisible(true);
                 
@@ -903,7 +942,6 @@ public class dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel kepala;
@@ -918,6 +956,7 @@ public class dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel logominimize;
     private javax.swing.JPanel menu_label;
     private java.awt.Button save;
+    private javax.swing.JScrollPane tabel_panel;
     private javax.swing.JTextField text_email;
     private javax.swing.JTextField text_nama;
     private javax.swing.JTextField text_nim;
