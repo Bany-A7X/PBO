@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Bulan Mei 2019 pada 20.10
+-- Waktu pembuatan: 07 Bulan Mei 2019 pada 20.05
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 7.1.28
 
@@ -37,6 +37,14 @@ CREATE TABLE `menuadd` (
   `lokasi` varchar(50) DEFAULT NULL,
   `keterangan` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `menuadd`
+--
+
+INSERT INTO `menuadd` (`id`, `nama`, `email`, `kategori`, `item`, `lokasi`, `keterangan`) VALUES
+(14117164, 'Achmad Bany Majesty', 'achmad.14117164@student.itera.ac.id', 'sarana/prasarana', 'AC', 'C113', 'belum'),
+(14120164, 'Bany Majesty', 'Banymajesty@gmail.com', 'sarana/prasarana', 'Papan tulis', 'C108', 'belum');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
