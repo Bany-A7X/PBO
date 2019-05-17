@@ -154,7 +154,7 @@ public class mail extends javax.swing.JFrame {
             if(txt_mail.getText() !=null && !txt_mail.getText().equals("")){
                 email Email = new email();
                 Email.sendMail(txt_mail.getText(), txt_subjek.getText(), txt_pesan.getText());
-                JOptionPane.showMessageDialog(null,"Pesan berhasil terkirim!","Message", JOptionPane.OK_OPTION);
+                JOptionPane.showMessageDialog(null, "Email berhasil terkirim!");
                 
             }else{
                 JOptionPane.showMessageDialog(null,"Value required : Mail", "Error", JOptionPane.OK_OPTION);
